@@ -1,6 +1,6 @@
 // VANILLA node.js : javascript only
 // comment added on branch 'login-branch'
-// new comment 10/12/18 09:00
+// 10/12/18 09:00 modify to have launch on heroku
 
 // Core Modules
 const fs = require('fs');
@@ -12,10 +12,7 @@ const v8 = require('v8');
 
 let etime = new Date();
 
-let port = process.env.PORT;  // heroku defines env var for port
-if (port == null || port == "") {
-    port = 3000;
-}
+const PORT = process.env.PORT || 5000;
 
 function logger (mssg) {
     let nowtime = new Date();
@@ -27,7 +24,8 @@ function logger (mssg) {
 logger('Started app.js');
 
 // HTTP Server Start
-const hostname = '127.0.0.1';
+// const hostname = '127.0.0.1';
+
 // const port = 3000; replaced by heroku
 const server = http.createServer((req, res) => {
 
@@ -96,8 +94,9 @@ const server = http.createServer((req, res) => {
     } // GET req.url switch
 
 });
-server.listen(port, hostname, () => {
-    logger(`Server running at http://${hostname}:${port}/`);
+server.listen(PORT, /*hostname,*/ () => {
+    // logger(`Server running at http://${hostname}:${PORT}/`);
+    logger(`Server running on port ${ PORT }`);
 });
 
 // ASYNC File Reader with callback
